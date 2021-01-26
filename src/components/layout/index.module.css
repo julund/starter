@@ -1,0 +1,7 @@
+.container {
+    font-size: large;
+    margin: 0 auto;
+    max-width: 720px;
+    padding: 1rem;
+    background-color: var(--color-gray-500);
+}

@@ -1,0 +1,7 @@
+{
+  "manifest_version": 2,
+  "name": "Starter",
+  "version": "1.0.0",
+  "default_locale": "no",
+  "description": "A plain text description"
+}
