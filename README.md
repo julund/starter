@@ -1,0 +1,2 @@
+# starter
+Nextjs starter template
