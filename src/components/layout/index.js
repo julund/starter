@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Header from "./header";
-import Nav from "./nav";
+import Navbar from "./navbar";
 import Footer from "./footer";
 import Main from "./main";
 import Content from './content'
@@ -12,7 +12,7 @@ const Layout = props => (
     </Head>
     <Header/>
     <Main>
-        <Nav/>
+        <Navbar/>
         <Content>
             {props.children}
         </Content>

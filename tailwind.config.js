@@ -5,11 +5,11 @@ module.exports = {
             './src/**/*.js',
         ],
     },
-    variants: {
-        extend: {
-        opacity: ['disabled'],
-        }
-    },
+    // variants: {
+    //     extend: {
+    //         opacity: ['disabled'],
+    //     }
+    // },
     theme: {
         fontFamily: {
             'title': ['Poppins', 'sans-serif'],
