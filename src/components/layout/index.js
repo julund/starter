@@ -1,14 +1,23 @@
 import Head from "next/head";
-import styles from './index.module.css'
+import Header from "./header";
+import Nav from "./nav";
+import Footer from "./footer";
+import Main from "./main";
+import Content from './content'
 
 const Layout = props => (
   <>
     <Head>
       <title>{props.page ? props.page + " • " : ""}Starter</title>
     </Head>
-    <main className={styles.container}>
-      {props.children}
-    </main>
+    <Header/>
+    <Main>
+        <Nav/>
+        <Content>
+            {props.children}
+        </Content>
+    </Main>
+    <Footer/>
   </>
 );
 
