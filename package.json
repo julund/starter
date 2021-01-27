@@ -12,6 +12,7 @@
   "author": "@julund",
   "license": "MIT",
   "dependencies": {
+    "@graywolfai/react-heroicons": "^1.2.3",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest"

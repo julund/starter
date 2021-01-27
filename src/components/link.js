@@ -10,7 +10,7 @@ const Link = (props) => {
         'button': `px-4 py-2 rounded-md hover:bg-gray-50 hover:text-primary-600 ${isActive ? 'bg-gray-100 text-primary-700' : 'bg-gray-200 text-primary-800'}`,
         'nav': `border-b-4 hover:border-primary-300 ${isActive ? 'border-primary-300' : 'border-transparent'}`
    }
-   const style = styles[props.type || 'normal']
+   const style = `${styles[props.type || 'normal']}${props.className ? ' ' + props.className : ''}`
     return (
         <NextLink href={props.href}>
             <a {...props} className={style}>{props.children}</a>
