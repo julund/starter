@@ -5,3 +5,4 @@ npm-debug.log*
 .env.test
 .next
 node_modules
+.theia
