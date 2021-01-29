@@ -5,11 +5,6 @@ module.exports = {
             './src/**/*.js',
         ],
     },
-    // variants: {
-    //     extend: {
-    //         opacity: ['disabled'],
-    //     }
-    // },
     theme: {
         fontFamily: {
             'title': ['Poppins', 'sans-serif'],
@@ -45,6 +40,9 @@ module.exports = {
                     800: '#00766e',
                     900: '#00625a'
                 }
+            },
+            transitionProperty: {
+                'height': 'height',
             }
         }
     },
