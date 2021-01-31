@@ -1,14 +1,13 @@
 import Link from "../link";
 import { MenuSolid, XSolid } from '@graywolfai/react-heroicons'
 import { useState } from "react"
-import {useSpring, animated, config} from 'react-spring'
-// import { Keyframes, animated } from 'react-spring/renderprops.cjs'
+// import {useSpring, animated, config} from 'react-spring'
 
-const Menu = ({ children, props, state }) =>
-    <animated.div
+const Menu = ({ children, state }) =>
+    <div
         className={"md:flex flex-col md:flex-row flex-grow items-center gap-2 md:gap-6" + (state ? " flex" : " hidden")}
-        style={props}
-    >{children}</animated.div>
+        // style={props}
+    >{children}</div>
 
 const MenuItem = ({children, href}) => <Link onClick={() => setIsOpen(false)} className="items-center border-b-4 hover:border-primary-300" activeClassName="border-primary-300" inactiveClassName="border-transparent" href={href}>{children}</Link>
 
@@ -16,11 +15,11 @@ export default function Navbar() {
 
     const [isOpen, setIsOpen] = useState(false);
     
-    const props = useSpring({
-        opacity: isOpen ? 1 : 0,
-        height: isOpen ? 115 : 0,
-        config: config.default,
-    })
+    // const props = useSpring({
+    //     opacity: isOpen ? 1 : 0,
+    //     height: isOpen ? 115 : 0,
+    //     config: config.default,
+    // })
 
     return (
         <nav className="sticky top-0 flex flex-wrap items-center justify-between p-4 bg-gray-200">
@@ -31,7 +30,8 @@ export default function Navbar() {
                         {isOpen ? <XSolid className="h-6 fill-current" /> : <MenuSolid className="h-6 fill-current" />}
                     </a>
                 </div>
-                <Menu props={props} state={isOpen}>
+                {/* <Menu props={props} state={isOpen}> */}
+                <Menu state={isOpen}>
                         <MenuItem href="/services">Services</MenuItem>
                         <MenuItem href="/about-us">About us</MenuItem>
                         <MenuItem href="/contact">Contact</MenuItem>
