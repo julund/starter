@@ -9,12 +9,13 @@ const Menu = ({ children, state }) =>
         // style={props}
     >{children}</div>
 
-const MenuItem = ({children, href}) => <Link onClick={() => setIsOpen(false)} className="items-center border-b-4 hover:border-primary-300" activeClassName="border-primary-300" inactiveClassName="border-transparent" href={href}>{children}</Link>
+
 
 export default function Navbar() {
 
     const [isOpen, setIsOpen] = useState(false);
     
+    const MenuItem = ({children, href}) => <Link onClick={() => setIsOpen(false)} className="items-center border-b-4 hover:border-primary-300" activeClassName="border-primary-300" inactiveClassName="border-transparent" href={href}>{children}</Link>    
     // const props = useSpring({
     //     opacity: isOpen ? 1 : 0,
     //     height: isOpen ? 115 : 0,
@@ -25,7 +26,7 @@ export default function Navbar() {
         <nav className="sticky top-0 flex flex-wrap items-center justify-between p-4 bg-gray-200">
             <div className="container md:px-4 mx-auto flex flex-wrap items-center justify-between gap-2">
                 <div className="w-full flex justify-between items-center md:w-auto md:justify-start mr-2 md:mr-6 font-title">
-                    <Link className="items-center border-b-4 whitespace-no-wrap" href="/">Starter</Link>
+                    <Link className="items-center border-b-4 whitespace-no-wrap" href="/">Nextailwind</Link>
                     <a role="button" className="block md:hidden select-none" aria-label="menu" aria-expanded={isOpen} onClick={() => setIsOpen(!isOpen)}>
                         {isOpen ? <XSolid className="h-6 fill-current" /> : <MenuSolid className="h-6 fill-current" />}
                     </a>
@@ -33,7 +34,7 @@ export default function Navbar() {
                 {/* <Menu props={props} state={isOpen}> */}
                 <Menu state={isOpen}>
                         <MenuItem href="/services">Services</MenuItem>
-                        <MenuItem href="/about-us">About us</MenuItem>
+                        <MenuItem href="/about">About</MenuItem>
                         <MenuItem href="/contact">Contact</MenuItem>
                 </Menu>
             </div>
