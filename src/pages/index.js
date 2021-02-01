@@ -3,7 +3,7 @@ import Modal from '../components/modal'
 
 function Index() { 
     return (
-    <Layout>
+    <Layout page="Home">
         <h1 className="font-title text-2xl my-2">Dignissimos officia</h1>
         <p className="leading-relaxed my-1">Dignissimos officia et enim impedit quia. Aliquid quia aut dolorem. Aperiam dicta libero fugiat minus qui impedit minima optio. Non cumque temporibus error molestiae et et. Vel at magnam et perferendis asperiores.</p>
         <h2 className="font-title text-xl my-2">Maxime voluptas</h2>

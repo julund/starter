@@ -8,7 +8,7 @@ import Content from './content'
 const Layout = props => (
   <>
     <Head>
-      <title>{props.page ? props.page + " • " : ""}Starter</title>
+      <title>Starter{props.page ? " ~ " + props.page : ""}</title>
     </Head>
     <Header/>
     <Main>
