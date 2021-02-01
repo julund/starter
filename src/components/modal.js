@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { XSolid } from '@graywolfai/react-heroicons'
 import { Spring, animated, config} from 'react-spring/renderprops.cjs'
+import Button from './button'
 
 function ClientOnlyPortal({ children, selector }) {
     const ref = useRef()
@@ -41,12 +42,9 @@ export default function Modal({ children, trigger }) {
                                         {children}
                                     </div>
                                     <div className="flex justify-center pt-4">
-                                        <button
-                                            onClick={() => setOpen(false)}
-                                            type="button"
-                                            className="rounded-lg px-5 py-2 border-2 border-gray-300 focus:border-transparent focus:outline-none focus:shadow-outline font-medium">
+                                        <Button onClick={() => setOpen(false)} type="button">
                                             Dismiss
-                                        </button>
+                                        </Button>
                                     </div>
                                 </div>
                             </animated.div>}

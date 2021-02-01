@@ -1,5 +1,6 @@
 import Layout from "../components/layout";
 import Modal from '../components/modal'
+import Button from "../components/button";
 
 function Index() { 
     return (
@@ -11,7 +12,7 @@ function Index() {
         <h2 className="font-title text-xl my-2">Dolore</h2>
         <p className="leading-relaxed my-1">Dolore est nisi perferendis dolor. Dolore quia consectetur ab. Et dolore earum sit voluptatem molestias deserunt ea.</p>
         <Modal trigger={
-            <button className="px-5 py-2 rounded overflow-hidden focus:outline-none focus:shadow-outline bg-primary-500 text-light text-sm lg:text-base">Open modal</button>}>
+            <Button className="text-sm">Open modal</Button>}>
             <p>This is the modal.</p>
         </Modal>
     </Layout>

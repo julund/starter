@@ -13,8 +13,8 @@ class MyDocument extends Document {
           <link rel="manifest" href="manifest.json" />
           <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
           <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
-          <link rel="preload" href="/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin="anonymous"/>
-          <link rel="preload" href="/fonts/poppins-700.woff2" as="font" type="font/woff2" crossorigin="anonymous"/>
+          <link rel="preload" href="/fonts/poppins-400.woff2" as="font" type="font/woff2" crossOrigin="anonymous"/>
+          <link rel="preload" href="/fonts/poppins-700.woff2" as="font" type="font/woff2" crossOrigin="anonymous"/>
           <meta name="Description" content="Put your description here."/>
         </Head>
         <body>
