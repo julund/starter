@@ -4,6 +4,7 @@ import Navbar from "./navbar";
 import Footer from "./footer";
 import Main from "./main";
 import Content from './content'
+import Hero from "./hero";
 
 const Layout = props => (
   <>
@@ -13,6 +14,7 @@ const Layout = props => (
     <Header/>
     <Main>
         <Navbar/>
+        { props.page === 'Home' && <Hero/>}
         <Content>
             {props.children}
         </Content>

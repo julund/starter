@@ -1,6 +1,4 @@
 import Layout from "../components/layout";
-import Modal from '../components/modal'
-import Button from "../components/button";
 
 function Index() { 
     return (
@@ -11,10 +9,6 @@ function Index() {
         <p className="leading-relaxed my-1">Fuga est minus ipsam odio non. Totam vel suscipit maxime voluptas fugiat mollitia. Qui non dicta illum necessitatibus.</p>
         <h2 className="font-title text-xl my-2">Dolore</h2>
         <p className="leading-relaxed my-1">Dolore est nisi perferendis dolor. Dolore quia consectetur ab. Et dolore earum sit voluptatem molestias deserunt ea.</p>
-        <Modal trigger={
-            <Button className="text-sm">Open modal</Button>}>
-            <p>This is the modal.</p>
-        </Modal>
     </Layout>
     )
 }
