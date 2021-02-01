@@ -12,6 +12,8 @@ class MyDocument extends Document {
         <Head>
           <link rel="manifest" href="manifest.json" />
           {/* <link rel="icon" type="image/png" href="favicon.png"/> */}
+          <link rel="preload" href="/fonts/poppins-400.woff2" as="font" type="font/woff2" crossorigin="anonymous"></link>
+          <link rel="preload" href="/fonts/poppins-700.woff2" as="font" type="font/woff2" crossorigin="anonymous"></link>
           <meta name="Description" content="Put your description here."/>
         </Head>
         <body>

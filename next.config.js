@@ -4,4 +4,6 @@ module.exports = {
     images: {
         domains: ['example.com'],
     },
+        // optimizeFonts: true,
+        // optimizeImages: true
   }
