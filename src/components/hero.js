@@ -9,9 +9,9 @@ const Hero = props => {
         config: config.gentle
     }
     const spring = {
-        from: { transform: 'translate3D(-50px,0,0', },
+        from: { transform: 'translate3D(-35px,0,0', },
         to: { transform: 'translate3D(0,0px,0', },
-        config: config.wobbly,
+        config: config.default,
     }
     // const items = [
     //     {key:1, className:"font-title text-4xl my-2 text-gray-200", text:"Next.js & tailwind.css starter template"},

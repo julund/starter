@@ -1,40 +1,84 @@
-import Link from "../link";
+import Link from "../link"
 import { MenuSolid, XSolid } from '@graywolfai/react-heroicons'
 import { useState } from "react"
-// import {useSpring, animated, config} from 'react-spring'
+import { createBreakpoint } from "react-use"
+import { Trail, animated, config } from 'react-spring/renderprops.cjs'
 
-const Menu = ({ children, state }) =>
-    <div className={"md:flex flex-col md:flex-row flex-grow items-center gap-2 md:gap-6" + (state ? " flex" : " hidden")}
-        // style={props}
-    >{children}</div>
+const useBreakpoint = createBreakpoint({ md: 768, sm: 640 });
 
 export default function Navbar() {
 
     const [isOpen, setIsOpen] = useState(false);
-    
-    const MenuItem = ({children, href}) => <Link onClick={() => setIsOpen(false)} className="items-center border-b-4 hover:border-primary-300" activeClassName="border-primary-300" inactiveClassName="border-transparent" href={href}>{children}</Link>    
-    // const props = useSpring({
-    //     opacity: isOpen ? 1 : 0,
-    //     height: isOpen ? 115 : 0,
-    //     config: config.default,
-    // })
+    const breakpoint = useBreakpoint();
 
-    return (
-        <nav className="sticky top-0 z-10 flex flex-wrap items-center justify-between p-4 bg-gray-200">
-            <div className="container md:px-4 mx-auto flex flex-wrap items-center justify-between gap-2">
-                <div className="w-full flex justify-between items-center md:w-auto md:justify-start mr-2 md:mr-6 font-title">
-                    <Link className="items-center border-b-4 whitespace-no-wrap text-base" href="/">Starter</Link>
-                    <a role="button" className="block md:hidden select-none text-compliment-800" aria-label="menu" aria-expanded={isOpen} onClick={() => setIsOpen(!isOpen)}>
-                        {isOpen ? <XSolid className="h-6 fill-current" /> : <MenuSolid className="h-6 fill-current" />}
-                    </a>
+    const spring = {
+        from: { transform: 'translate3D(0,-25px,0', },
+        to: { transform: 'translate3D(0,0px,0', },
+        config: config.default,
+    }
+
+    const Nav = ({children}) => {
+        return (
+            <nav className="sticky top-0 z-10 flex flex-wrap items-center justify-between p-4 bg-gray-200">
+                <div className="container md:px-4 mx-auto flex flex-wrap items-center justify-between gap-2">
+                    {children}
                 </div>
-                {/* <Menu props={props} state={isOpen}> */}
-                <Menu state={isOpen}>
-                        <MenuItem href="/services">Services</MenuItem>
-                        <MenuItem href="/about">About</MenuItem>
-                        <MenuItem href="/contact">Contact</MenuItem>
-                </Menu>
-            </div>
-        </nav>
+            </nav>
+        )
+    }
+
+    const Logo = () => {
+        return (
+            <Link className="items-center border-b-4 whitespace-no-wrap text-base" href="/">Starter</Link>
+        )
+    }
+
+    const Toggle = () => {
+        return (
+            <a role="button" className="block select-none focus:text-compliment-800" aria-label="menu" aria-expanded={isOpen} onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? <XSolid className="h-6 fill-current" /> : <MenuSolid className="h-6 fill-current" />}
+            </a>
+        )
+    }
+
+    const Menu = ({ children }) => {
+        const isLarge = (breakpoint !== 'sm')
+        return (
+            <div className={`${(isOpen || isLarge ? "flex" : "hidden")} flex-grow items-center text-base ${(isLarge) ? "flex-row gap-6" : "flex-col gap-2"}`}
+            >{children}</div>
+        )
+    }
+
+    const Header = ({ children }) => {
+        return (
+            <div className="w-full flex justify-between items-center md:w-auto md:justify-start mr-2 md:mr-6 font-title">{children}</div>
+        )
+    }
+
+    const MenuItem = ({ children, href }) => {
+        return (
+            <Link onClick={() => setIsOpen(false)} className="items-center border-b-4 hover:border-primary-300" activeClassName="border-primary-300" inactiveClassName="border-transparent" href={href}>
+                {children}
+            </Link>
+        )
+    }
+
+    const items = [
+        <MenuItem href="/services">Services</MenuItem>,
+        <MenuItem href="/about">About</MenuItem>,
+        <MenuItem href="/contact">Contact</MenuItem>
+    ]
+    return (
+        <Nav>
+            <Header>
+                <Logo />
+                { (breakpoint === 'sm' && <Toggle/>)}
+            </Header>
+            <Menu state={isOpen}>
+                <Trail items={items} keys={items.map((_, i) => i)} {...spring} reverse={isOpen}>
+                    {item => props => <div style={props}>{item}</div> }
+                </Trail>
+            </Menu>
+        </Nav>
     );
 }
