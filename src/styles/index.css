@@ -20,6 +20,15 @@ body,html {
 * {
   box-sizing: border-box;
 }
+
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* purgecss ignore */
 body,
 html,
