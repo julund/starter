@@ -2,7 +2,7 @@ import Link from "../link"
 import { MenuSolid, XSolid } from '@graywolfai/react-heroicons'
 import { useState } from "react"
 import { createBreakpoint } from "react-use"
-import { Trail, animated, config } from 'react-spring/renderprops.cjs'
+import { Spring, Trail, config } from 'react-spring/renderprops.cjs'
 
 const useBreakpoint = createBreakpoint({ md: 768, sm: 640 });
 
@@ -12,9 +12,10 @@ export default function Navbar() {
     const breakpoint = useBreakpoint();
 
     const spring = {
-        from: { transform: 'translate3D(0,-25px,0', },
-        to: { transform: 'translate3D(0,0px,0', },
-        config: config.default,
+        from: { transform: 'translate3D(0,-45%,0)' },
+        to: { transform: 'translate3D(0,0%,0)' },
+        reset: !isOpen, reverse: !isOpen,
+        config: config.wobbly,
     }
 
     const Nav = ({children}) => {
@@ -42,32 +43,39 @@ export default function Navbar() {
     }
 
     const Menu = ({ children }) => {
-        const isLarge = (breakpoint !== 'sm')
-        return (
-            <div className={`${(isOpen || isLarge ? "flex" : "hidden")} flex-grow items-center text-base ${(isLarge) ? "flex-row gap-6" : "flex-col gap-2"}`}
-            >{children}</div>
-        )
+       const isLarge = (breakpoint !== 'sm')
+       if (!isLarge) return (
+            <Spring {...spring}>
+                {props => <div style={props}  className={`${(isOpen ? "flex" : "hidden")} flex-grow items-center z-10 flex-col gap-2 absolute top-12 left-0 bg-gray-200 p-4 w-full`}>{children}</div>}
+            </Spring>)
+            else return (
+                <div className={`flex flex-grow items-center flex-row gap-4`}>{children}</div>
+            )
+        // return ( <div className={`${(isOpen || isLarge ? "flex" : "hidden")} flex-grow items-center ${(isLarge) ? "flex-row gap-6" : "flex-col gap-2 absolute top-12 left-0 bg-gray-200 p-4 w-full "}`}
+            // >{children}</div>
+        // )
     }
 
     const Header = ({ children }) => {
         return (
-            <div className="w-full flex justify-between items-center md:w-auto md:justify-start mr-2 md:mr-6 font-title">{children}</div>
+            <div className="w-full z-20 flex justify-between items-center md:w-auto md:justify-start mr-2 md:mr-6 font-title">{children}</div>
         )
     }
 
-    const MenuItem = ({ children, href }) => {
+    const MenuItem = ({ children, href, style }) => {
         return (
-            <Link onClick={() => setIsOpen(false)} className="items-center border-b-4 hover:border-primary-300" activeClassName="border-primary-300" inactiveClassName="border-transparent" href={href}>
+            <Link onClick={() => setIsOpen(false)} className="items-center border-b-4 hover:border-primary-300" activeClassName="border-primary-300" inactiveClassName="border-transparent" href={href} style={style}>
                 {children}
             </Link>
         )
     }
 
     const items = [
-        <MenuItem href="/services">Services</MenuItem>,
-        <MenuItem href="/about">About</MenuItem>,
-        <MenuItem href="/contact">Contact</MenuItem>
+        { href: "/services", text: "Services"},
+        { href: "/about", text: "About"},
+        { href: "/contact", text: "Contact"}
     ]
+    
     return (
         <Nav>
             <Header>
@@ -75,9 +83,10 @@ export default function Navbar() {
                 { (breakpoint === 'sm' && <Toggle/>)}
             </Header>
             <Menu state={isOpen}>
-                <Trail items={items} keys={items.map((_, i) => i)} {...spring} reverse={isOpen}>
-                    {item => props => <div style={props}>{item}</div> }
-                </Trail>
+                { items.map((item, i) => <MenuItem key={i} href={item.href}>{item.text}</MenuItem>)}
+                {/* <Trail items={items} keys={items.map((_, i) => i)} {...spring}>
+                    {item => props => <MenuItem style={props} href={item.href}>{item.text}</MenuItem>}
+                </Trail> */}
             </Menu>
         </Nav>
     );
