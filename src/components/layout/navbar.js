@@ -16,7 +16,7 @@ const Dropdown = Keyframes.Spring({
 
 const Content = Keyframes.Trail({
     default: { x: 0, opacity: 1 },
-    initial: { x: 0, opacity: 1 },
+    initial: { x: 0, opacity: 0 },
     open: { x: 0, opacity: 1, delay: 100 },
     close: { x: -50, opacity: 0, delay: 0 },
     config: config.wobbly
