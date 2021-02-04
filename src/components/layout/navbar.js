@@ -7,21 +7,29 @@ import { Keyframes, animated, config } from 'react-spring/renderprops.cjs'
 const useBreakpoint = createBreakpoint({ md: 768, sm: 640 });
 
 const Dropdown = Keyframes.Spring({
+    default: { x: 0 },
+    initial: { x: -100 },
     open: { x: 0 },
     close: { x: -100 },
     config: config.default
 })
 
 const Content = Keyframes.Trail({
+    default: { x: 0, opacity: 1 },
+    initial: { x: 0, opacity: 1 },
     open: { x: 0, opacity: 1, delay: 100 },
     close: { x: -50, opacity: 0, delay: 0 },
+    config: config.wobbly
 })
 
 export default function Navbar() {
 
-    const [isOpen, setIsOpen] = useState(false);
-    const useSmallViewport = useBreakpoint() == 'sm';
-    const state = isOpen === undefined ? 'peek' : isOpen || !useSmallViewport ? 'open' : 'close'
+    const [isOpen, setIsOpen] = useState(undefined);
+    const breakpoint = useBreakpoint()
+    const useSmallViewport = breakpoint == 'sm';
+    // console.log(!useSmallViewport && isOpen === undefined)
+
+    const state = !useSmallViewport && isOpen === undefined ? 'default' : isOpen === undefined ? 'initial' : isOpen || !useSmallViewport ? 'open' : 'close'
 
     const MenuItem = forwardRef(({ children, href, style }, ref) => {
         return (
@@ -54,7 +62,6 @@ export default function Navbar() {
                             className={`${(useSmallViewport) ? "overflow-hidden absolute left-0 top-12 z-10 flex-col bg-gray-200 w-full" : "flex-row"} flex flex-grow items-center`}
                             style={{ transform: x.interpolate(x => `translate3d(0,${x}%,0)`), }}
                         >
-                            {/* {items.map((item, i) => <MenuItem key={i} href={item.href}>{item.text}</MenuItem>)} */}
                             <Content native items={items} keys={items.map((_, i) => i)} reverse={!isOpen} state={state}>
                                 {(item, i) => ({ x, ...props }) => (
                                 <AnimatedMenuItem
