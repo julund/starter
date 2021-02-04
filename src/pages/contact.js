@@ -16,14 +16,14 @@ function Contact() {
     return (
     <Layout page="Contact">
         <Content>
-            <a role="button" className="block elect-none text-gray-800" aria-label="menu" aria-expanded={isOpen} onClick={() => setIsOpen(!isOpen)}>
+            <a role="button" className="block select-none text-gray-800" aria-label="menu" aria-expanded={isOpen} onClick={() => setIsOpen(!isOpen)}>
                 {isOpen ? <XSolid className="h-6 fill-current" /> : <MenuSolid className="h-6 fill-current" />}
             </a>
             <Sidebar native state={state}>
                 {({ x, opacity }) => (
                     <animated.div
                         className="w-28 bg-gray-300 h-full p-4"
-                        style={{ opacity: opacity, transform: x.interpolate(x => `translate3d(${x}%,0,0)`), }}
+                        style={{ opacity: opacity, transform: x.interpolate(x => `translate3d(0,${x}%,0)`), }}
                     >
                         Hello
                     </animated.div>)}
