@@ -1,23 +1,37 @@
 import Link from "../link"
 import { MenuSolid, XSolid } from '@graywolfai/react-heroicons'
-import { useState } from "react"
+import { useState, forwardRef } from "react"
 import { createBreakpoint } from "react-use"
-import { Spring, animated, config } from 'react-spring/renderprops.cjs'
+import { Keyframes, animated, config } from 'react-spring/renderprops.cjs'
 
 const useBreakpoint = createBreakpoint({ md: 768, sm: 640 });
+
+const Dropdown = Keyframes.Spring({
+    open: { x: 0 },
+    close: { x: -100 },
+    config: config.default
+})
+
+const Content = Keyframes.Trail({
+    open: { x: 0, opacity: 1, delay: 100 },
+    close: { x: -50, opacity: 0, delay: 0 },
+})
 
 export default function Navbar() {
 
     const [isOpen, setIsOpen] = useState(false);
     const useSmallViewport = useBreakpoint() == 'sm';
+    const state = isOpen === undefined ? 'peek' : isOpen || !useSmallViewport ? 'open' : 'close'
 
-    const MenuItem = ({ children, href, style }) => {
+    const MenuItem = forwardRef(({ children, href, style }, ref) => {
         return (
-            <Link onClick={() => setIsOpen(false)} className="items-center mx-4 my-2 border-b-4 hover:border-primary-300" activeClassName="border-primary-300" inactiveClassName="border-transparent" href={href} style={style}>
+            <Link ref={ref} onClick={() => setIsOpen(false)} className="items-center mx-4 my-2 border-b-4 hover:border-primary-300" activeClassName="border-primary-300" inactiveClassName="border-transparent" href={href} style={style}>
                 {children}
             </Link>
         )
-    }
+    })
+
+    const AnimatedMenuItem = animated(MenuItem)
 
     const items = [
         { href: "/services", text: "Services"},
@@ -26,7 +40,7 @@ export default function Navbar() {
     ]
     
     return (
-        <nav className="sticky top-0 z-10 flex flex-wrap items-center justify-between pb-2 pt-4 px-4 bg-gray-200">
+        <nav className="sticky top-0 z-10 flex flex-wrap items-center justify-between p-4 bg-gray-200">
             <div className="container md:px-4 mx-auto flex flex-wrap items-center justify-between gap-2">
                 <div className="w-full z-20 flex justify-between items-center md:w-auto md:justify-start mr-2 md:mr-6 font-title">
                     <Link className="items-center border-b-4 whitespace-no-wrap text-base" href="/">Starter</Link>
@@ -34,13 +48,27 @@ export default function Navbar() {
                         {isOpen ? <XSolid className="h-6 fill-current" /> : <MenuSolid className="h-6 fill-current" />}
                     </a>)}
                 </div>
-                <Spring native force config={config.default} from={{ height: isOpen ? 0 : 'auto' }} to={{ height: isOpen ? 'auto' : 0 }}>
-                    {props => (
-                        <animated.div className={`${(useSmallViewport) ? "overflow-hidden absolute left-0 top-12 z-10 flex-col bg-gray-200 w-full" : "flex-row"} flex flex-grow items-center`} style={props}>
-                            {items.map((item, i) => <MenuItem key={i} href={item.href}>{item.text}</MenuItem>)}
-                        </animated.div>
-                    )}
-                </Spring>
+                <Dropdown native state={state}>
+                    {({ x }) => (
+                        <animated.div
+                            className={`${(useSmallViewport) ? "overflow-hidden absolute left-0 top-12 z-10 flex-col bg-gray-200 w-full" : "flex-row"} flex flex-grow items-center`}
+                            style={{ transform: x.interpolate(x => `translate3d(0,${x}%,0)`), }}
+                        >
+                            {/* {items.map((item, i) => <MenuItem key={i} href={item.href}>{item.text}</MenuItem>)} */}
+                            <Content native items={items} keys={items.map((_, i) => i)} reverse={!isOpen} state={state}>
+                                {(item, i) => ({ x, ...props }) => (
+                                <AnimatedMenuItem
+                                    key={i} href={item.href}
+                                    style={{
+                                    transform: x.interpolate(x => `translate3d(0,${x}%,0)`),
+                                    ...props,
+                                    }}>
+                                    {item.text}
+                                </AnimatedMenuItem>
+                                )}
+                            </Content>
+                        </animated.div>)}
+                </Dropdown>
             </div>
         </nav>
     );
