@@ -1,10 +1,9 @@
 import Link from "../link"
 import { MenuSolid, XSolid } from '@graywolfai/react-heroicons'
 import { useState, forwardRef } from "react"
-import { createBreakpoint, useMeasure } from "react-use"
+// import { useWindowSize } from "react-use"
+import { useMeasure } from "react-use"
 import { Keyframes, animated, config } from 'react-spring/renderprops.cjs'
-
-// const useBreakpoint = createBreakpoint({ desktop: 768, mobile: 640 });
 
 const Dropdown = Keyframes.Spring({
     peek: { x: 0 },
@@ -23,9 +22,9 @@ const Content = Keyframes.Trail({
 export default function Navbar() {
 
     const [isOpen, setIsOpen] = useState(undefined);
-    // const breakpoint = useBreakpoint()
+    // const {width} = useWindowSize();
     const [ref, { width }] = useMeasure();
-    // const mobile = breakpoint == 'mobile';
+    // const mobile = width <= 768
     const mobile = width <= 730 && width > 0
     const state = mobile ? isOpen == undefined ? 'close' : isOpen ? 'open' : 'close' : 'peek'
 
