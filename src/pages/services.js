@@ -6,8 +6,8 @@ import { Trail } from 'react-spring/renderprops.cjs'
 function Services({photos}) {
 
     const animation = {
-        from: {height: 100, opacity: 0, transform: 'translate3d(0,-10px,0)'},
-        to: {height: 115, opacity: 1, transform: 'translate3d(0,0px,0)'},
+        from: {opacity: 0, transform: 'translate3d(-10px,0,0)'},
+        to: {opacity: 1, transform: 'translate3d(0px,0,0)'},
         config: { mass: 1, tension: 190, friction: 30 }
     }
     return (
@@ -18,7 +18,7 @@ function Services({photos}) {
             <div className="grid grid-cols-5 gap-2">
                 <Trail items={photos} keys={photo => photo.id} {...animation}>
                     {photo => props => 
-                        <div key={photo.id} style={props} className="bg-gray-600 relative flex-grow overflow-hidden rounded-lg shadow-md">
+                        <div key={photo.id} style={props} className="bg-gray-600 relative flex-grow overflow-hidden rounded shadow-md h-32">
                             <Image src={photo.download_url} layout="fill" className="object-cover object-center" alt={photo.title} title={`Photo by ${photo.author}`}/>
                         </div>
                         }
