@@ -52,16 +52,19 @@ export default function Modal({ children, trigger }) {
                 {show => show && (props => 
                     <div style={props} className="fixed inset-0 z-30 bg-gray-900 bg-opacity-75 flex items-center justify-center p-3">
                         <div onClick={toggle} className="fixed inset-0 bg-gray-900 bg-opacity-75"></div>
-                        <div className="z-10 bg-white w-72 max-w-lg rounded-lg overflow-hidden px-3 lg:px-6 py-4">
-                            <div className="flex flex-col items-center space-y-2">
-                                {children}
-                            </div>
-                            <div className="flex justify-center pt-4">
-                                <Button onClick={toggle} type="button">
-                                    <XSolid className="h-4"/> Close
-                                </Button>
-                            </div>
-                        </div>
+                        <Transition items={isOpen} {...box}>
+                            {show => show && (props => 
+                                <div style={props} className="z-10 bg-white w-72 max-w-lg rounded-lg overflow-hidden px-3 lg:px-6 py-4">
+                                    <div className="flex flex-col items-center space-y-2">
+                                        {children}
+                                    </div>
+                                    <div className="flex justify-center pt-4">
+                                        <Button onClick={toggle} type="button">
+                                            <XSolid className="h-4"/> Close
+                                        </Button>
+                                    </div>
+                                </div>)}
+                        </Transition>
                     </div>
                 )}
             </Transition>
