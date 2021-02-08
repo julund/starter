@@ -6,14 +6,14 @@ import { useMeasure } from "react-use"
 import { Keyframes, animated, config } from 'react-spring/renderprops.cjs'
 
 const Dropdown = Keyframes.Spring({
-    peek: { x: 0 },
+    initial: { x: 0 },
     open: { x: 0 },
     close: { x: -100 },
     config: config.default
 })
 
 const Content = Keyframes.Trail({
-    peek: { x: 0, opacity: 1 },
+    initial: { x: 0, opacity: 1 },
     open: { x: 0, opacity: 1, delay: 100 },
     close: { x: -50, opacity: 0, delay: 0 },
     config: config.wobbly
@@ -25,8 +25,8 @@ export default function Navbar() {
     // const {width} = useWindowSize();
     const [ref, { width }] = useMeasure();
     // const mobile = width <= 768
-    const mobile = width <= 730 && width > 0
-    const state = mobile ? isOpen == undefined ? 'close' : isOpen ? 'open' : 'close' : 'peek'
+    const mobile = width > 0 && width <= 730
+    const state = mobile ? isOpen == undefined ? 'close' : isOpen ? 'open' : 'close' : 'initial'
 
     const MenuItem = forwardRef(({ children, href, style }, ref) => {
         return (
@@ -48,7 +48,7 @@ export default function Navbar() {
         <nav ref={ref} className="sticky top-0 z-10 flex flex-wrap items-center justify-between p-4 bg-gray-200">
             <div className="container md:px-4 mx-auto flex flex-wrap items-center justify-between gap-2">
                 <div className="w-full z-20 flex justify-between items-center md:w-auto md:justify-start mr-2 md:mr-6 font-title">
-                    <Link className="items-center border-b-4 whitespace-no-wrap text-base" href="/">Starter</Link>
+                    <Link className="items-center border-b-4 whitespace-no-wrap text-lg" href="/">Starter</Link>
                     {(mobile && <a role="button" className="block select-none focus:text-compliment-800" aria-label="menu" aria-expanded={(isOpen == undefined ? false : !isOpen)} onClick={() => setIsOpen(isOpen == undefined ? true : !isOpen)}>
                         {(isOpen) ? <XSolid className="h-6 fill-current" /> : <MenuSolid className="h-6 fill-current" />}
                     </a>)}

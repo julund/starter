@@ -17,10 +17,9 @@ const Hero = props => {
     //     {key:1, className:"font-title text-4xl my-2 text-gray-200", text:"Next.js & tailwind.css starter template"},
     //     {key:2, className:"font-title text-xl my-2 text-gray-300", text:"Lorem ipsum dolar sit amet."},]
     const items = [
-        <h1 className="font-title text-4xl my-2 text-gray-200">Next.js &amp; tailwind.css starter template</h1>,
+        <h1 className="font-title text-4xl my-2 text-gray-200">Next &amp; tailwind starter template</h1>,
         <p className="font-title text-xl my-2 text-gray-300">Lorem ipsum dolar sit amet. Necessitatibus laudantium numquam qui dolor consequuntur vero sint.</p>,
-        <Modal className="mx-auto p-4" trigger={
-            <Button className="text-sm">Open modal</Button>}>
+        <Modal className="mx-auto p-4" trigger="Open modal">
             <p>This is the modal.</p>
         </Modal>
     ]
