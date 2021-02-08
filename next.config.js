@@ -2,7 +2,7 @@ module.exports = {
     poweredByHeader: false,
     reactStrictMode: true,
     images: {
-        domains: ['example.com'],
+        domains: ['picsum.photos','unsplash.com'],
     },
         // optimizeFonts: true,
         // optimizeImages: true
