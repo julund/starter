@@ -13,9 +13,9 @@ function Services({photos}) {
     return (
     <Layout page="Services">
         <Content>
-            <h1 className="font-title text-2xl my-2">Services</h1>
-            <p className="leading-relaxed my-1">Dignissimos officia et enim impedit quia. Aliquid quia aut dolorem. Aperiam dicta libero fugiat minus qui impedit minima optio. Non cumque temporibus error molestiae et et. Vel at magnam et perferendis asperiores.</p>
-            <div className="grid grid-cols-5 gap-2">
+            <h1 className="font-title text-2xl py-2">Services</h1>
+            <p className="leading-relaxed my-1 py-2">Dignissimos officia et enim impedit quia. Aliquid quia aut dolorem. Aperiam dicta libero fugiat minus qui impedit minima optio. Non cumque temporibus error molestiae et et. Vel at magnam et perferendis asperiores.</p>
+            <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-4">
                 <Trail items={photos} keys={photo => photo.id} {...animation}>
                     {photo => props => 
                         <div key={photo.id} style={props} className="bg-gray-600 relative flex-grow overflow-hidden rounded shadow-md h-32">
